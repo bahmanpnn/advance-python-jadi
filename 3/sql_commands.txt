@@ -1,0 +1,90 @@
+install mysql in windows or linux
+linux(ubuntu)==>sudo apt install mariadb-server
+sudo service mariadb start
+sudo mysql -u root
+show databases;
+CREATE DATABASE IF NOT EXISTS test_database;
+USE test_database;
+show tables;
+
+CREATE TABLE person (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT,
+    email VARCHAR(255) UNIQUE
+);
+
+DESCRIBE person;
+
+insert into person values(1,'bahman',26,"bahmanpn@gmail.com");
+select * from person;
+select name from person where name = "amir";
+
+sudo mysql -u root -e "SELECT User, Host FROM mysql.user;"
+
+
+# how bind a mysql of wsl to windows project and use python to connect to it==>
+# way 1 (it faced with error in localhost(i think it works on servers) and must try another way)
+in powershell==>wsl hostname -I ==> copy that address 
+in wsl again==>sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+then change bind-address with that address you got in powershell ==> save it(ctrl+x then y and enter to save the file and changes)
+sudo service mariadb restart
+
+# way 2 dont change bind-address
+sudo mysql -u root
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'your_password';
+FLUSH PRIVILEGES;
+sudo service mariadb restart
+
+# and done
+# just remember that wsl connect to root@localhost 
+
+import mysql.connector
+
+cnx = mysql.connector.connect(user="root",
+                              password="your_new_password",
+                              host="127.0.0.1",
+                              database="test_database")
+
+print("Connected successfully")
+cnx.close()
+
+
+# display all users.if root needs password use -p tag before -e
+sudo mysql -u root -e "SELECT User, Host FROM mysql.user;"
+sudo mysql -u root -p -e "SELECT User, Host FROM mysql.user;"
+
+
+
+# % means any server and ip user can connect!!
+sudo mysql -u root -e "CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypassword';"
+sudo mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'%' WITH GRANT OPTION;"
+
+# if you want to edit user host must just drop and delete it and create new one.you can have both too and use them everywhere you want!!==>
+sudo mysql -u root -e "CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'mypassword';"
+sudo mysql -u root -e "DROP USER 'myuser'@'%';"
+FLUSH PRIVILEGES;
+
+
+# reset password 
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'bahman';
+FLUSH PRIVILEGES;
+
+# disbale password
+# way 1
+ALTER USER 'root'@'localhost' IDENTIFIED BY '';
+
+# way 2
+ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
+FLUSH PRIVILEGES;
+
+# now dont need to give pass when you want to use mariadb service==>
+sudo mysql -u root  // before was ==> sudo mysql -u root -p ==>then give password
+
+# if you want to set pass again:
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_password';
+FLUSH PRIVILEGES;
+
+
+# project directory in wsl(mnt is a windows directory)
+/mnt/c/users/bahmanpn/desktop/advance-python-jadi/3$
