@@ -17,6 +17,7 @@ CREATE TABLE person (
 DESCRIBE person;
 
 insert into person values(1,'bahman',26,"bahmanpn@gmail.com");
+
 select * from person;
 select name from person where name = "amir";
 
@@ -48,6 +49,13 @@ cnx = mysql.connector.connect(user="root",
 
 print("Connected successfully")
 cnx.close()
+
+
+#add a row in python
+insert_sql= f"INSERT INTO employee (name, height, weight) VALUES ({name}, {height}, {weight})"
+cursor.execute(insert_sql)
+cnx.commit()
+
 
 
 # display all users.if root needs password use -p tag before -e
