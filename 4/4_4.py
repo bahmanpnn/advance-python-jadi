@@ -33,3 +33,6 @@ print(val2.attrs)
 
 print(soup.find('article',attrs={'class':['kt-post-card', 'kt-post-card--outlined', 'kt-post-card']}))
 # print(soup.find('article',attrs={'class':['unsafe-kt-post-card', 'unsafe-kt-post-card--outlined', 'unsafe-kt-post-card']}))
+
+# *** we can combine regex and beautiful soup together.like using sub method for removing spaces or something==>
+ 
