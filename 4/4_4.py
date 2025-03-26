@@ -6,6 +6,9 @@
     that tool is beautifulsoup package.
     we can use regex too but this package is better and helps us more.
     rule==> BeautifulSoup(page(or file(html(r.text))),how)
+
+    *** we can combine regex and beautiful soup together.like using sub method for removing spaces or something
+ 
 """
 import requests
 from bs4 import BeautifulSoup
@@ -34,5 +37,3 @@ print(val2.attrs)
 print(soup.find('article',attrs={'class':['kt-post-card', 'kt-post-card--outlined', 'kt-post-card']}))
 # print(soup.find('article',attrs={'class':['unsafe-kt-post-card', 'unsafe-kt-post-card--outlined', 'unsafe-kt-post-card']}))
 
-# *** we can combine regex and beautiful soup together.like using sub method for removing spaces or something==>
- 
