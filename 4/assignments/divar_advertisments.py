@@ -61,4 +61,4 @@ if response.status_code == 200:
             print(f"عنوان: {title}, قیمت: {price}")
 
 else:
-    print(f"خطا در دریافت اطلاعات! کد وضعیت: {response.status_code}")
+   print(f"خطا در دریافت اطلاعات! کد وضعیت: {response.status_code}")
