@@ -41,6 +41,7 @@ try:
 
             # حذف کل داده‌ها برای جایگزینی جدید
             cursor.execute("DELETE FROM Country")
+            # cursor.execute("Truncate Table Country")
             cnx.commit()
             print("Old data deleted.")
 
