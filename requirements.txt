@@ -8,6 +8,7 @@ kagglehub==0.3.10
 mysql-connector-python==9.2.0
 numpy==2.2.4
 packaging==24.2
+PySocks==1.7.1
 PyYAML==6.0.2
 requests==2.32.3
 scikit-learn==1.6.1
